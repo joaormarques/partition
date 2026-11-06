@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#060a14" />
+    <title>Partition</title>
+  </head>
+  <body>
+    <main>
+      <header id="hud">
+        <div class="stat">
+          <span class="label">Level</span>
+          <b id="hud-level">1</b>
+        </div>
+        <div class="stat">
+          <span class="label">Lives</span>
+          <span id="hud-lives" class="pips" aria-label="2 lives"></span>
+        </div>
+        <div class="stat">
+          <span class="label">Balls</span>
+          <b id="hud-balls">0</b>
+        </div>
+        <div class="stat fill">
+          <span class="label">Filled <b id="hud-fill">0%</b> <span class="dim" id="hud-target">/ 75%</span></span>
+          <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Filled">
+            <div id="hud-fill-bar"></div>
+            <div class="target" id="hud-target-mark"></div>
+          </div>
+        </div>
+        <div class="stat score">
+          <span class="label">Score</span>
+          <b id="hud-score">0</b>
+        </div>
+        <div class="buttons">
+          <button id="hud-music" class="icon-btn" type="button" title="Music on/off" aria-pressed="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 18V6l10-2v12" />
+              <circle cx="6.5" cy="18" r="2.5" />
+              <circle cx="16.5" cy="16" r="2.5" />
+              <path class="slash" d="M4 4l16 16" />
+            </svg>
+          </button>
+          <button id="hud-sound" class="icon-btn" type="button" title="Sound on/off (M)" aria-pressed="true">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9h4l5-4v14l-5-4H4z" />
+              <path class="waves" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" />
+              <path class="slash" d="M16 9l6 6M22 9l-6 6" />
+            </svg>
+          </button>
+          <button id="hud-settings" class="icon-btn" type="button" title="Settings" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"
+              />
+            </svg>
+          </button>
+          <button id="hud-orient" type="button" title="Rotate wall (Right-click or Space)">↕</button>
+        </div>
+      </header>
+      <canvas id="field"></canvas>
+      <div id="effects" aria-live="polite"></div>
+    </main>
+
+    <dialog id="settings" aria-labelledby="settings-title">
+      <form method="dialog">
+        <h2 id="settings-title">Settings</h2>
+
+        <fieldset>
+          <legend>Difficulty</legend>
+          <div id="difficulty-options" class="options"></div>
+          <p id="difficulty-note" class="note" hidden>Applies from your next game.</p>
+        </fieldset>
+
+        <fieldset>
+          <legend>Audio</legend>
+          <label class="toggle"><input type="checkbox" id="opt-sound" /> Sound effects and music</label>
+          <label class="toggle"><input type="checkbox" id="opt-music" /> Music</label>
+        </fieldset>
+
+        <section>
+          <div class="section-head">
+            <h3 id="scores-title">Best scores</h3>
+            <button type="button" id="reset-scores" class="text-btn">Reset</button>
+          </div>
+          <ol id="scores" aria-labelledby="scores-title"></ol>
+        </section>
+
+        <section>
+          <h3>Controls</h3>
+          <dl class="controls">
+            <dt>Build a wall</dt><dd>Click or tap an empty cell</dd>
+            <dt>Rotate</dt><dd>Right-click, Space, or the ↕ button. On touch, swipe to build in that direction.</dd>
+            <dt>Pause</dt><dd>P or Esc. Opening Settings also pauses.</dd>
+            <dt>Mute</dt><dd>M</dd>
+          </dl>
+        </section>
+
+        <button class="primary" value="close">Done</button>
+      </form>
+    </dialog>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
