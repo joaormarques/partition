@@ -1,5 +1,7 @@
 # Partition
 
+**Play it:** https://joaormarques.github.io/partition/
+
 A browser arcade game about splitting a board around bouncing balls. Build walls to seal off empty areas; a ball that touches a wall while it is still growing breaks it and costs a life. Fill 75% of the board to clear a level.
 
 It is an original game in the wall-building genre, with its own ball types, power-ups, art and audio. Everything is drawn on a canvas and every sound is synthesized with Web Audio, so there are no image or audio files.
@@ -73,7 +75,9 @@ Most tuning lives in constants: `src/game/constants.ts` (board, speeds), the `KI
 npm run build
 ```
 
-`dist/` is a static site with relative paths, so it can be served from any folder: GitHub Pages, Netlify, or any static host. Preview it locally with `npx vite preview`.
+`dist/` is a static site with relative paths, so it can be served from any folder or static host. Preview it locally with `npx vite preview`.
+
+Every push to `main` deploys to GitHub Pages through `.github/workflows/deploy.yml`, which typechecks, runs the tests and builds before publishing. A failing test stops the deploy.
 
 ```bash
 npm run build:artifact
